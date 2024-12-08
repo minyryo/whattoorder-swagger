@@ -1,4 +1,3 @@
-
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
@@ -6,6 +5,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Create Swagger configuration
   const config = new DocumentBuilder()
     .setTitle('WhatToOrder - AnGiHomNay API')
     .setDescription(
@@ -23,8 +23,8 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api-docs', app, document); // Serve Swagger at `/api-docs`
 
-  await app.listen(3000);
+  await app.listen(8888);
 }
 bootstrap();
